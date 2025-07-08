@@ -32,5 +32,9 @@
         })
       })
     })
+
+    fetch('object_long', {headers: {Range: 'bytes=5183-5183'}}).then(resp => {
+      console.log(resp.status);
+    })
   </script>
 </html>
