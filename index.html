@@ -39,5 +39,18 @@
         })
       })
     })
+    fetch('file', {headers:{Range: 'bytes=525-22237'}}).then(resp => {
+      console.log("Attempting to access arrayBuffer 2");
+      resp.arrayBuffer().then(a => {
+        console.log("Accessed arrayBuffer 2");
+        const compressedStream = new Response(a).body;
+        const ds = new DecompressionStream('gzip');
+        const decompressedStream = compressedStream.pipeThrough(ds);
+        const decompressedResponse = new Response(decompressedStream);
+        decompressedResponse.text().then(text => {
+          console.log("decompressed", text);
+        })
+      })
+    })
   </script>
 </html>
