@@ -39,5 +39,12 @@
         })
       })
     })
+
+    fetch('https://pmtiles.io/protomaps(vector)ODbL_firenze.pmtiles', {headers:{Range: 'bytes=526-22237'}}).then(resp => {
+      console.log("Attempting to access arrayBuffer 2");
+      resp.arrayBuffer().then(a => {
+        console.log("Accessed arrayBuffer 2");
+      })
+    })
   </script>
 </html>
