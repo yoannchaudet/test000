@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GitHub Pages + Firefox + Range bug</title>
+  </head>
+  <body>
+    The result of fetching the uncompressed stream via range: <span id="uncompressed"></span>
+    <br/>
+    The result of fetching the compressed stream via range: <span id="compressed"></span>
+  </body>
+  <script>
+    fetch('object', {headers: {Range: 'bytes=0-12'}}).then(resp => {
+      resp.text().then(text => {
+        document.getElementById("uncompressed").innerHTML = text;
+      })
+    })
+    fetch('object.gz', {headers: {Range: 'bytes=0-38'}}).then(resp => {
+      const ds = new DecompressionStream('gzip');
+      resp.arrayBuffer().then(a => {
+        const compressedStream = new Response(a).body;
+        const decompressedStream = compressedStream.pipeThrough(ds);
+        const decompressedResponse = new Response(decompressedStream);
+        decompressedResponse.text().then(text => {
+          document.getElementById("compressed").innerHTML = text;
+        })
+      })
+    })
+  </script>
+</html>
