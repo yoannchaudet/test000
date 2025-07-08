@@ -33,9 +33,14 @@
         const decompressedStream = compressedStream.pipeThrough(ds);
         const decompressedResponse = new Response(decompressedStream);
         decompressedResponse.text().then(text => {
-          console.log(text);
-          // document.getElementById("compressed").innerHTML = text;
+          console.log("decompressed", text);
         })
+      })
+    })
+
+    fetch('https://pmtiles.io/protomaps(vector)ODbL_firenze.pmtiles', {headers:{Range: 'bytes=525-22237'}}).then(resp => {
+      resp.text().then(t => {
+        console.log("raw", t);
       })
     })
   </script>
