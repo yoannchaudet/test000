@@ -14,7 +14,7 @@
     //     document.getElementById("uncompressed").innerHTML = text;
     //   })
     // })
-    fetch('object_prepended.pmtiles', {headers: {Range: 'bytes=5242880-5242918'}}).then(resp => {
+    fetch('object_prepended.pmtiles', {headers: {Range: 'bytes=5242880-5242919'}}).then(resp => {
       const ds = new DecompressionStream('gzip');
       resp.arrayBuffer().then(a => {
         const compressedStream = new Response(a).body;
