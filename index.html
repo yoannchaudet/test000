@@ -9,7 +9,7 @@
     The result of fetching the 5MB+ stream via range: <span id="long"></span>
   </body>
   <script>
-    fetch('object_short', {headers: {Range: 'bytes=0-38'}}).then(resp => {
+    fetch('object_short.pmtiles', {headers: {Range: 'bytes=0-38'}}).then(resp => {
       const ds = new DecompressionStream('gzip');
       resp.arrayBuffer().then(a => {
         const compressedStream = new Response(a).body;
@@ -21,7 +21,7 @@
       })
     })
 
-    fetch('object_long', {headers: {Range: 'bytes=5242880-5242918'}}).then(resp => {
+    fetch('object_long.pmtiles', {headers: {Range: 'bytes=5242880-5242918'}}).then(resp => {
       const ds = new DecompressionStream('gzip');
       resp.arrayBuffer().then(a => {
         const compressedStream = new Response(a).body;
@@ -33,7 +33,7 @@
       })
     })
 
-    fetch('object_long', {headers: {Range: 'bytes=5183-5183'}}).then(resp => {
+    fetch('object_long.pmtiles', {headers: {Range: 'bytes=5183-5183'}}).then(resp => {
       console.log(resp.status);
     })
   </script>
